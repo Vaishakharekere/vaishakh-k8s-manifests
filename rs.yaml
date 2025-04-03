@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: cart-page-rs
+  namespace: vaishakh-ns
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      web: cart
+  template: #it defines which application we have to deploy in Cluster(POD Definition)
+    metadata:
+      labels:
+        web: cart
+    spec: #it defines Behaviour of POD and Container
+      containers:
+      - name: cart-container
+        image: muralisocial123/cart-page-test:1.0
+        #resources:
+         # limits:
+        #   memory: "100Mi"
+         #   cpu: "100m"
+        ports:
+          - containerPort: 3000
